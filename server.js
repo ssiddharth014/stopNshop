@@ -14,7 +14,7 @@ const productRoute = require('./routes/productRoutes')
 const orderRoute = require('./routes/orderRoutes')
 const uploadRoute = require('./routes/uploadRoutes')
 
-const URL = config. MONGODB_URL
+const URL = 'mongodb+srv://shop:shop@shop.abwnf.mongodb.net/<dbname>?retryWrites=true&w=majority'
 const db=async() =>{
 	try{
 await mongoose.connect(URL,{useUnifiedTopology:true,useNewUrlParser:true,useCreateIndex:true})
