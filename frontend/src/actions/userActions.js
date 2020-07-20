@@ -8,7 +8,7 @@ const signin= (email,password)=> async (dispatch)=>{
 		email,password
 	}})
 	try{
-const data= await axios.post(`http://localhost:5000/api/users/signin`,{email,password});
+const data= await axios.post(`/api/users/signin`,{email,password});
 
 
 console.log(data)
@@ -27,7 +27,7 @@ const register=(name,email,password)=>async(dispatch)=>{
 		name,email,password
 	}})
 	try{
-		const {data} = await axios.post(`http://localhost:5000/api/users/register`,{name,email,password});
+		const {data} = await axios.post(`/api/users/register`,{name,email,password});
 console.log("data",data)
 dispatch({type:USER_REGISTER_SUCCESS,payload:data});
 console.log("data",data)
@@ -42,7 +42,7 @@ const update = ({ userId, name, email, password }) => async (dispatch, getState)
   const { userSignin: { userInfo } } = getState();
   dispatch({ type: USER_UPDATE_REQUEST, payload: { userId, name, email, password } });
   try {
-    const { data } = await axios.put("http://localhost:5000/api/users/" + userId,
+    const { data } = await axios.put("/api/users/" + userId,
       { name, email, password }, {
       headers: {
         Authorization: 'Bearer ' + userInfo.token

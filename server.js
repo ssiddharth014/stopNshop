@@ -8,12 +8,13 @@ const config= require('./config')
 
 
 
+
 const userRoute = require('./routes/userRoutes')
 const productRoute = require('./routes/productRoutes')
 const orderRoute = require('./routes/orderRoutes')
 const uploadRoute = require('./routes/uploadRoutes')
 
-const URL ="mongodb+srv://shop:shop@shop.abwnf.mongodb.net/<dbname>?retryWrites=true&w=majority"
+const URL = config. MONGODB_URL
 const db=async() =>{
 	try{
 await mongoose.connect(URL,{useUnifiedTopology:true,useNewUrlParser:true,useCreateIndex:true})
@@ -37,8 +38,10 @@ app.use('/api/uploads', uploadRoute);
 app.get('/api/config/paypal', (req, res) => {
   res.send(config.PAYPAL_CLIENT_ID);
 });
+
+app.use(express.static('frontend/build'));
 app.get('*', (req, res) => {
-  res.sendFile(path.join(`${__dirname}/../frontend/build/index.html`));
+  res.sendFile(path.resolve(__dirname,'frontend','build','index.html'));
 });
 
 app.listen( process.env.PORT || 5000, () => {
